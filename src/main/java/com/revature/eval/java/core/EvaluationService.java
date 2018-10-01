@@ -1,6 +1,9 @@
 package com.revature.eval.java.core;
 
+import static org.junit.Assert.assertEquals;
+
 import java.time.temporal.Temporal;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -31,7 +34,10 @@ public class EvaluationService {
 	 */
 	public String acronym(String phrase) {
 		// TODO Write an implementation for this method declaration
-		return null;
+		 String str = "Portable Network Graphics";
+		    String acronym = str.replaceAll("\\B.|\\P{L}", "").toUpperCase();
+		System.out.println(acronym);
+		return acronym;
 	}
 
 	/**
@@ -85,16 +91,24 @@ public class EvaluationService {
 
 		public boolean isEquilateral() {
 			// TODO Write an implementation for this method declaration
+			if (sideOne == sideTwo && sideTwo == sideThree);
+			System.out.println("Triangle is an Equilateral");
 			return false;
 		}
 
 		public boolean isIsosceles() {
 			// TODO Write an implementation for this method declaration
+			if (((sideOne==sideTwo && sideTwo!=sideThree ) || 
+					(sideOne!=sideTwo && sideThree==sideOne) || 
+					(sideThree==sideTwo && sideThree!=sideOne)));
+			System.out.println("Triangle is an Isoceles");
 			return false;
 		}
 
 		public boolean isScalene() {
 			// TODO Write an implementation for this method declaration
+			if(sideOne!=sideTwo && sideTwo!=sideThree && sideThree!=sideOne)
+			System.out.println("Triangle is Scalene");
 			return false;
 		}
 
@@ -115,10 +129,71 @@ public class EvaluationService {
 	 * @param string
 	 * @return
 	 */
-	public int getScrabbleScore(String string) {
+	public int getScrabbleScore(String word) {
 		// TODO Write an implementation for this method declaration
-		return 0;
+		 Map<Character, Integer> lettersMap = new HashMap<>();
+	        String lettersCap = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+	        for (int i = 0; i < lettersCap.length(); i++) {
+	            if (lettersCap.charAt(i) == 'A' || lettersCap.charAt(i) == 'E' ||
+	                    lettersCap.charAt(i) == 'I' || lettersCap.charAt(i) == 'O' ||
+	                    lettersCap.charAt(i) == 'O' || lettersCap.charAt(i) == 'U' ||
+	                    lettersCap.charAt(i) == 'L' || lettersCap.charAt(i) == 'N' ||
+	                    lettersCap.charAt(i) == 'R' || lettersCap.charAt(i) == 'S' ||
+	                    lettersCap.charAt(i) == 'T') {
+
+	                lettersMap.put(lettersCap.charAt(i), 1);
+	                lettersMap.put(lettersCap.toLowerCase().charAt(i), 1);
+	            }
+
+	            if (lettersCap.charAt(i) == 'D' || lettersCap.charAt(i) == 'G') {
+	                lettersMap.put(lettersCap.charAt(i), 2);
+	                lettersMap.put(lettersCap.toLowerCase().charAt(i), 2);
+	            }
+
+	            if (lettersCap.charAt(i) == 'B' || lettersCap.charAt(i) == 'C' ||
+	                    lettersCap.charAt(i) == 'M' || lettersCap.charAt(i) == 'P') {
+	                lettersMap.put(lettersCap.charAt(i), 3);
+	                lettersMap.put(lettersCap.toLowerCase().charAt(i), 3);
+	            }
+
+	            if (lettersCap.charAt(i) == 'F' || lettersCap.charAt(i) == 'H' ||
+	                    lettersCap.charAt(i) == 'V' || lettersCap.charAt(i) == 'W' ||
+	                    lettersCap.charAt(i) == 'Y') {
+	                lettersMap.put(lettersCap.charAt(i), 4);
+	                lettersMap.put(lettersCap.toLowerCase().charAt(i), 4);
+	            }
+
+	            if (lettersCap.charAt(i) == 'K') {
+	                lettersMap.put(lettersCap.charAt(i), 5);
+	                lettersMap.put(lettersCap.toLowerCase().charAt(i), 5);
+	            }
+
+	            if (lettersCap.charAt(i) == 'J' || lettersCap.charAt(i) == 'X') {
+	                lettersMap.put(lettersCap.charAt(i), 8);
+	                lettersMap.put(lettersCap.toLowerCase().charAt(i), 8);
+	            }
+
+	            if (lettersCap.charAt(i) == 'Q' || lettersCap.charAt(i) == 'Z') {
+	                lettersMap.put(lettersCap.charAt(i), 10);
+	                lettersMap.put(lettersCap.toLowerCase().charAt(i), 10);
+	            }
+
+	        }
+
+	        int totalValue = 0;
+
+	        for (int j = 0; j < word.length(); j++) {
+
+	            totalValue += lettersMap.get(word.charAt(j));
+	        }
+	        System.out.println(totalValue);
+
+	        return totalValue;
+	 
+
 	}
+	
 
 	/**
 	 * 5. Clean up user-entered phone numbers so that they can be sent SMS messages.
@@ -153,7 +228,24 @@ public class EvaluationService {
 	 */
 	public String cleanPhoneNumber(String string) {
 		// TODO Write an implementation for this method declaration
-		return null;
+		 StringBuilder sb = new StringBuilder(13);
+		    StringBuilder temp = new StringBuilder(sb.toString());
+
+		    while (temp.length() < 10)
+		        temp.insert(0, "0");
+
+		    char[] chars = temp.toString().toCharArray();
+
+		    sb.append("(");
+		    for (int i = 0; i < chars.length; i++) {
+		        if (i == 3)
+		            sb.append(") ");
+		        else if (i == 6)
+		            sb.append("-");
+		        sb.append(chars[i]);
+		    }
+		    System.out.println(sb.toString());
+		    return sb.toString();
 	}
 
 	/**
@@ -167,7 +259,22 @@ public class EvaluationService {
 	 */
 	public Map<String, Integer> wordCount(String string) {
 		// TODO Write an implementation for this method declaration
+		String someString = "elephant";
+		char someChar = 'e';
+		int count = 0;
+		  
+		for (int i = 0; i < someString.length(); i++) {
+		    if (someString.charAt(i) == someChar) {
+		        count++;
+		    }
+		}
+		assertEquals(2, count);
 		return null;
+	}
+
+	private void assertEquals(int i, int count) {
+		// TODO Auto-generated method stub
+		
 	}
 
 	/**
@@ -210,6 +317,7 @@ public class EvaluationService {
 
 		public int indexOf(T t) {
 			// TODO Write an implementation for this method declaration
+			
 			return 0;
 		}
 
